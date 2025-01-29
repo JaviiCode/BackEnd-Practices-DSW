@@ -32,6 +32,9 @@ class UsuarioController extends Controller
      */
     public function store(StoreUsuarioRequest $request)
     {
+        /*$usuario = new Usuario($request->all());
+        $usuario->save();
+        return new UsuarioResource($usuario);*/
         return new UsuarioResource(Usuario::Create($request->all()));
     }
 
@@ -63,7 +66,7 @@ class UsuarioController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
-        $usuario->update($request->all);
+        $usuario->update($request->all());
     }
 
     /**

@@ -13,10 +13,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 Route::group(['prefix' => 'javiigm'], function(){
     Route::apiResource('usuarios', UsuarioController::class);
     Route::apiResource('categorias', CategoriaController::class);
