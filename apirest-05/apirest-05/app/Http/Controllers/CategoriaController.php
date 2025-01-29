@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoriaCollection;
+use App\Http\Resources\CategoriaResource;
 use App\Models\Categoria;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
@@ -13,7 +15,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        //Esto me sirve para mostrar todos los datos de categoria
+        $categoria = Categoria::paginate(10);
+        return new CategoriaCollection($categoria);
     }
 
     /**
@@ -29,7 +33,7 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        //
+        return new CategoriaResource(Categoria::create($request->all()));
     }
 
     /**
@@ -37,7 +41,8 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        //Esto me sirve para mostrar datos especificos de una categoria en especifico
+        return new CategoriaResource($categoria);
     }
 
     /**

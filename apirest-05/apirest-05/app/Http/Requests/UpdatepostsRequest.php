@@ -22,7 +22,11 @@ class UpdatepostsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => ['sometimes', 'required'],
+            'cuerpo' => ['sometimes', 'required'],
+            'imagen' => ['sometimes', 'required'],
+            'usuario_id' => ['sometimes', 'required'],
+            'categoria_id' => ['sometimes', 'required'],
         ];
     }
 }

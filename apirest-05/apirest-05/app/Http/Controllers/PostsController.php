@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostsCollection;
+use App\Http\Resources\PostsResource;
 use App\Models\posts;
 use App\Http\Requests\StorepostsRequest;
 use App\Http\Requests\UpdatepostsRequest;
@@ -13,7 +15,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Posts::paginate(10);
+        return new PostsCollection($posts);
     }
 
     /**
@@ -29,7 +32,7 @@ class PostsController extends Controller
      */
     public function store(StorepostsRequest $request)
     {
-        //
+        return new PostsResource(Posts::create($request->all()));
     }
 
     /**
@@ -37,7 +40,12 @@ class PostsController extends Controller
      */
     public function show(posts $posts)
     {
-        //
+        $filtroCategorias = request()->query('categorias');
+
+        if($filtroCategorias){
+            return new PostsResource($posts->loadMissing('categorias'));
+        }
+        return new PostsResource($posts);
     }
 
     /**

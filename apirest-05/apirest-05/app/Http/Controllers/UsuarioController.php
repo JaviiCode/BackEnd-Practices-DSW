@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UsuarioCollection;
+use App\Http\Resources\UsuarioResource;
 use App\Models\Usuario;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
@@ -13,7 +15,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = Usuario::paginate(10);
+        return new UsuarioCollection($usuarios);
     }
 
     /**
@@ -29,7 +32,7 @@ class UsuarioController extends Controller
      */
     public function store(StoreUsuarioRequest $request)
     {
-        //
+        return new UsuarioResource(Usuario::Create($request->all()));
     }
 
     /**
@@ -37,7 +40,14 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        //
+        $filtroPosts = request()->query('posts');
+
+        if($filtroPosts){
+            return new UsuarioResource($usuario->loadMissing('posts.categoria'));
+        }
+
+        return new UsuarioResource($usuario);
+
     }
 
     /**
@@ -53,7 +63,7 @@ class UsuarioController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
-        //
+        $usuario->update($request->all);
     }
 
     /**
