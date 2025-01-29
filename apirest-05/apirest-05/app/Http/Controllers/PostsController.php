@@ -70,6 +70,7 @@ class PostsController extends Controller
      */
     public function destroy(posts $posts)
     {
-        //
+        $eliminado = $posts->delete();
+        return response()->json(['success' => $eliminado]);
     }
 }

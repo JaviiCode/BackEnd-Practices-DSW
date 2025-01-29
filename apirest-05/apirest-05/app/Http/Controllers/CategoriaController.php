@@ -67,6 +67,7 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $eliminado = $categoria->delete();
+        return response()->json(['success' => $eliminado]);
     }
 }

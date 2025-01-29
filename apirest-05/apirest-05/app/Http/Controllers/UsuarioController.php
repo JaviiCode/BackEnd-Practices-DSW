@@ -45,7 +45,7 @@ class UsuarioController extends Controller
     {
         $filtroPosts = request()->query('posts');
 
-        if($filtroPosts){
+        if ($filtroPosts) {
             return new UsuarioResource($usuario->loadMissing('posts.categoria'));
         }
 
@@ -75,6 +75,7 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        $eliminado = $usuario->delete();
+        return response()->json(['success' => $eliminado]);
     }
 }
