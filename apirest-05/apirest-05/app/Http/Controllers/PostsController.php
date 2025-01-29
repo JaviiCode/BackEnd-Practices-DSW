@@ -61,7 +61,8 @@ class PostsController extends Controller
      */
     public function update(UpdatepostsRequest $request, posts $posts)
     {
-        //
+        $actualizado = $posts->update($request->all());
+        return response()->json(['success' => $actualizado]);
     }
 
     /**

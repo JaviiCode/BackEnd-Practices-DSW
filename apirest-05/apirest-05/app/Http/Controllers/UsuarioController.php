@@ -66,7 +66,8 @@ class UsuarioController extends Controller
      */
     public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
-        $usuario->update($request->all());
+        $actualizado = $usuario->update($request->all());
+        return response()->json(['success' => $actualizado]);
     }
 
     /**

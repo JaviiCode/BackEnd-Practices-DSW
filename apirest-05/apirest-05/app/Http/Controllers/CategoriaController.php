@@ -58,7 +58,8 @@ class CategoriaController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        //
+        $actualizado = $categoria->update($request->all());
+        return response()->json(['success' => $actualizado]);
     }
 
     /**
